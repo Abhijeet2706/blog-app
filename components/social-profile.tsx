@@ -56,22 +56,6 @@ export default function SocialProfile() {
                         >
                             <FaTwitter className="w-5 h-5" />
                         </a>
-                        <a
-                            href="https://www.youtube.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-gray-400 hover:text-red-500"
-                            aria-label="YouTube"
-                        >
-                            {/* You can add YouTube icon here, or use another react-icon */}
-                            <svg
-                                fill="currentColor"
-                                className="w-5 h-5"
-                                viewBox="0 0 24 24"
-                            >
-                                <path d="M10 15l5.19-3L10 9v6zm11.5-3c0-2.5-.5-4.5-1.3-6.2-.4-.8-.9-1.3-1.6-1.6C17.2 4.2 15.2 4 12 4s-5.2.2-6.6.7c-.8.3-1.2.8-1.6 1.6C3.5 7.5 3 9.5 3 12c0 2.5.5 4.5 1.3 6.2.4.8.9 1.3 1.6 1.6 1.4.5 3.4.7 6.6.7s5.2-.2 6.6-.7c.8-.3 1.2-.8 1.6-1.6.8-1.7 1.3-3.7 1.3-6.2z" />
-                            </svg>
-                        </a>
                     </div>
                 </div>
 
