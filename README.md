@@ -2,11 +2,17 @@
 
 ## Overview
 
-This project is a modern, responsive frontend application built as a technical test for a Frontend Developer position. It demonstrates proficiency in React.js, Next.js, Tailwind CSS, responsive design, and clean project structure. The application includes a dynamic header with dropdown menus, a responsive mobile menu, a feature-rich footer, and an optional Blogs section with CRUD-like functionality and enhanced UI/UX.
+This project is a modern, responsive frontend application built using React.js, Next.js, and Tailwind CSS. It demonstrates a strong understanding of component-based architecture, responsive design, and clean project structure. The application features a dynamic header with dropdown menus, a responsive mobile menu, a feature-rich footer, and an optional Blogs section with full CRUD functionality and an enhanced UI/UX.
 
+
+
+## 🚀 Live Demo
+
+[![Click Here](https://img.shields.io/badge/Click%20Here-blue?style=for-the-badge)](https://blog-app-three-henna.vercel.app/)
 ---
 
-## ✨ Features
+## 🚀 Features
+
 
 - **Framework:** React.js (with Next.js for routing and SSR)
 - **CSS Framework:** Tailwind CSS (utility-first, highly customizable)
