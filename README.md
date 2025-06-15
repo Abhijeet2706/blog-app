@@ -49,31 +49,49 @@ This project is a modern, responsive frontend application built using React.js, 
 - **Canvas Confetti** (success animation)
 
 ---
+## 📡 API Integration
+
+This project uses an external API to handle blog data dynamically:
+
+- **Fetch All Blogs:** Lists all available blogs from the API.
+- **Fetch Individual Blog by ID:** Renders detailed blog data by fetching it using the blog ID.
+- **Create Blog:** Sends a POST request to the API to create new blogs. Includes image preview, tag input, and validation.
+
+> This API-driven architecture ensures scalability, real-time data updates, and production-ready structure.
+
+---
+
+## 🎉 Confetti & Loader Integration
+
+- 🎊 **Confetti Animation:** A success confetti animation is triggered after a blog is successfully created using `canvas-confetti`.
+- 🔄 **Loader Animation:** Loader appears while blog data is being fetched, improving UX during async operations.
+
+---
 
 ## 📦 Project Structure
 
 ```
 ├── app/
-│   ├── layout.tsx         # Root layout with header/footer
-│   ├── page.tsx           # Home page
-│   └── blogs/
-│       ├── page.tsx       # Blog listing page
-│       ├── [id]/page.tsx  # Blog details page
-│       └── create/page.tsx# Create blog page
+│ ├── layout.tsx # Root layout with header/footer
+│ ├── page.tsx # Home page
+│ └── blogs/
+│ ├── page.tsx # Blog listing page
+│ ├── [id]/page.tsx # Blog details page
+│ └── create/page.tsx# Create blog page
 ├── components/
-│   ├── header.tsx         # Header with navigation
-│   ├── footer.tsx         # Footer with navigation/socials
-│   ├── blogStore.ts       # Zustand store for blogs
-│   ├── ReadyToTransform.tsx # CTA widget
-│   ├── theme-provider.tsx # Theme context
-│   ├── theme-toggle.tsx   # Theme toggle button
-│   └── layout/breadcrumb.tsx # Breadcrumb component
+│ ├── header.tsx # Header with navigation
+│ ├── footer.tsx # Footer with navigation/socials
+│ ├── blogStore.ts # Zustand store for blogs
+│ ├── ReadyToTransform.tsx # CTA widget
+│ ├── theme-provider.tsx # Theme context
+│ ├── theme-toggle.tsx # Theme toggle button
+│ └── layout/breadcrumb.tsx # Breadcrumb component
 ├── public/
-│   └── ...                # Static assets
-├── tailwind.config.ts     # Tailwind CSS config
-├── postcss.config.js      # PostCSS config
-├── package.json           # Project metadata & scripts
-└── README.md              # This file
+│ └── ... # Static assets (e.g., favicon.ico)
+├── tailwind.config.ts # Tailwind CSS config
+├── postcss.config.js # PostCSS config
+├── package.json # Project metadata & scripts
+└── README.md # This file
 ```
 
 ---

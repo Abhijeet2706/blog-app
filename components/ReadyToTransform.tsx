@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function ReadyToTransform({ className = "" }) {
     // By default, left-[58%] for small screens, md:left-1/2 for medium and up
-    const positionClass = "left-[58%] md:left-1/2 -translate-x-1/2";
+    const positionClass = "left-[58%]";
     const redirectToCall = (e: React.FormEvent) => {
         e.preventDefault();
         window.location.href = "tel:+918340290109";

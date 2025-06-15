@@ -7,102 +7,18 @@ import * as React from "react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
+import { navigation } from "@/data/navigationData";
 import { cn } from "@/lib/utils";
+import ModalConact from "./model-contact";
 
-const navigation = [
-  {
-    name: "Unified Commerce",
-    href: "#",
-    hasDropdown: true,
-    dropdownContent: {
-      title: "Unified Commerce",
-      description:
-        "ETP Unify is a powerful cloud-native Unified Commerce Retail Solution. Built using MACH Architecture, it brings the best of Retail and e-commerce functionality to the user in one, easy to use, and beautiful interface.",
-      exploreLink: "Explore All Features",
-      features: {
-        left: [
-          "Cloud POS & Retail Operations",
-          "Smart Order Management",
-          "Omni-Channel Fulfillment",
-          "Unified Inventory Management",
-          "Unified Promotions Management",
-          "Customer Relationship Management",
-          "Marketplaces & E-commerce Integrations",
-        ],
-        right: [
-          "Product Information Management",
-          "API Management",
-          "Seamless Integration with Partners",
-          "Artificial Intelligence",
-          "Logistics Management",
-          "Mobile Applications",
-        ],
-      },
-      whatsNew: [
-        {
-          title:
-            "Can Data-Driven Insights Improve Your Promotions, Inventory, and Customer Engagement?",
-          image:
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop",
-          link: "#",
-        },
-        {
-          title:
-            "Why Your Current Mobile POS Systems Might Be Failing Your Retail Business",
-          image:
-            "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop",
-          link: "#",
-        },
-      ],
-    },
-  },
-  { name: "e-Commerce", href: "#" },
-  {
-    name: "Omni Channel",
-    href: "#",
-    hasDropdown: true,
-    dropdownContent: {
-      title: "Omni Channel",
-      description:
-        "Seamlessly unify your online and offline retail strategies with powerful omni-channel tools and workflows.",
-      exploreLink: "Explore Omni Channel",
-      features: {
-        left: ["Click & Collect", "Endless Aisle", "Channel Integration"],
-        right: ["Real-Time Sync", "Unified Promotions", "Analytics Dashboard"],
-      },
-      whatsNew: [
-        {
-          title: "Omni-Channel: The Future of Retail",
-          image:
-            "https://images.unsplash.com/photo-1565120130296-dfbd03c0f7ec?w=400&h=250&fit=crop",
-          link: "#",
-        },
-      ],
-    },
-  },
-  {
-    name: "Company",
-    href: "#",
-    hasDropdown: true,
-  },
-  {
-    name: "Industries",
-    href: "#",
-    hasDropdown: true,
-  },
-  {
-    name: "Resources",
-    href: "#",
-    hasDropdown: true,
-  },
-  { name: "Partners", href: "#" },
-];
 
-export function Header() {
+
+export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [activeDropdown, setActiveDropdown] = React.useState<string | null>(
     null
   );
+  const [showModal, setShowModal] = React.useState(false);
   const pathname = usePathname();
 
   const handleDropdownToggle = (itemName: string) => {
@@ -113,84 +29,102 @@ export function Header() {
     setActiveDropdown(null);
   };
 
-  return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="flex items-center">
-                <span className="text-2xl font-bold text-gray-900">ETP</span>
-                <div className="ml-1 w-0 h-0 border-l-[8px] border-l-orange-500 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent"></div>
-              </div>
-            </Link>
-          </div>
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <div key={item.name} className="relative group">
-                <button
-                  onClick={() =>
-                    item.hasDropdown ? handleDropdownToggle(item.name) : null
-                  }
-                  className={cn(
-                    "flex items-center text-sm font-medium transition-colors hover:text-gray-900",
-                    pathname === item.href ? "text-gray-900" : "text-gray-600"
-                  )}
-                >
-                  {item.name}
-                  {item.hasDropdown && (
-                    <ChevronDown
-                      className={cn(
-                        "ml-1 h-4 w-4 transition-transform",
-                        activeDropdown === item.name ? "rotate-180" : ""
-                      )}
-                    />
-                  )}
+    // OR: Open LinkedIn instead
+    window.open("https://linkedin.com/in/abhijeetkumar2706", "_blank");
+
+    setShowModal(false);
+  };
+
+  React.useEffect(() => {
+    if (activeDropdown) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [activeDropdown]);
+
+  return (
+    <>
+      <header className="sticky top-0 z-50 w-full border border-border bg-background">
+        <div className="container max-w-full px-8 mx-auto ">
+          <div className="flex h-20 items-center justify-between">
+            {/* Logo */}
+            <Link href="/" className="flex items-center space-x-2 mr-8">
+              <span className="text-3xl font-bold text-foreground">ETP</span>
+              <div className="ml-1 w-0 h-0 border-l-[16px] border-l-orange-400 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent"></div>
+            </Link>
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex flex-1 items-center justify-center space-x-8">
+              {navigation.map((item) => (
+                <div key={item.name} className="relative group">
+                  <button
+                    onClick={() =>
+                      item.hasDropdown ? handleDropdownToggle(item.name) : null
+                    }
+                    className={cn(
+                      "flex items-center text-sm font-medium transition-colors hover:text-gray-900",
+                      pathname === item.href ? "text-gray-900" : "text-gray-600"
+                    )}
+                  >
+                    {item.name}
+                    {item.hasDropdown && (
+                      <ChevronDown
+                        className={cn(
+                          "ml-1 h-4 w-4 transition-transform",
+                          activeDropdown === item.name ? "rotate-180" : ""
+                        )}
+                      />
+                    )}
+                  </button>
+                </div>
+              ))}
+            </nav>
+
+            {/* Right side */}
+            <div className="flex items-center space-x-6 ml-8">
+              <div className="hidden md:flex items-center">
+                <button className="flex items-center text-base font-medium text-muted-foreground hover:text-foreground">
+                  EN
+                  <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
               </div>
-            ))}
-          </nav>
+              <Button
+                asChild
+                className="hidden md:inline-flex bg-primary hover:bg-primary/80 text-primary-foreground rounded-full px-8 py-2 shadow-md hover:shadow-lg transition text-base font-medium"
+              >
+                <Link href="/blogs">Blogs →</Link>
+              </Button>
 
-          {/* Right side - Language and CTA */}
-          <div className="flex items-center space-x-4">
-            {/* Language Selector */}
-            <div className="hidden md:flex items-center">
-              <button className="flex items-center text-sm font-medium text-gray-600 hover:text-gray-900">
-                EN
-                <ChevronDown className="ml-1 h-4 w-4" />
-              </button>
+              <Button
+                variant="outline"
+                className="hidden md:inline-flex rounded-full border border-border text-foreground font-medium px-8 py-2 bg-transparent hover:bg-accent/50 transition items-center gap-2 text-base"
+                onClick={() => setShowModal(true)}
+              >
+                Let's Talk <span className="ml-1">→</span>
+              </Button>
+              <ThemeToggle />
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? (
+                  <X className="h-5 w-5" />
+                ) : (
+                  <Menu className="h-5 w-5" />
+                )}
+              </Button>
             </div>
-
-            {/* CTA Button */}
-            <Button
-              asChild
-              className="hidden md:inline-flex bg-gray-900 hover:bg-gray-800 text-white rounded-full px-6 py-2"
-            >
-              <Link href="/blogs">Blogs→</Link>
-            </Button>
-
-            <ThemeToggle />
-
-            {/* Mobile menu button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="lg:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </Button>
           </div>
         </div>
 
-        {/* Desktop Dropdown Panel */}
         {activeDropdown &&
           (() => {
             const currentNavItem = navigation.find(
@@ -202,88 +136,97 @@ export function Header() {
             const dropdownContent = currentNavItem.dropdownContent;
 
             return (
-              <div className="absolute left-0 right-0 top-full bg-white border-b shadow-lg z-40">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+              <div className="absolute left-0 right-0 top-full bg-white border-b shadow-lg z-400 max-h-[80vh] overflow-y-auto">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 ">
                   {/* Header Section */}
-                  <div className="mb-16">
-                    <div className="max-w-4xl">
-                      <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                        {dropdownContent.title}
-                      </h1>
-                      <div className="flex justify-end mb-8">
-                        <Link
-                          href="#"
-                          className="text-gray-600 hover:text-gray-900 font-medium underline"
-                        >
-                          {dropdownContent.exploreLink}
-                        </Link>
+                  <button
+                    onClick={() => setActiveDropdown(null)}
+                    className=" lg:hidden flex items-center gap-2 text-gray-600 hover:text-gray-900 text-base font-medium"
+                  >
+                    ← Go Back
+                  </button>
+                  <div className="mb-4 mt-10 sm:mt-0 sm:flex sm:justify-between">
+                    <div className="max-w-4xl flex flex-col items-start justify-between">
+                      <div className="flex flex-col items-start justify-between  mb-6">
+                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+                          {dropdownContent.title}
+                        </h3>
+                        <p className="text-lg text-gray-600 max-w-3xl leading-relaxed mt-3">
+                          {dropdownContent.description}
+                        </p>
                       </div>
-                      <p className="text-lg text-gray-600 max-w-3xl leading-relaxed">
-                        {dropdownContent.description}
-                      </p>
                     </div>
+                    <Link
+                      onClick={() => closeDropdown()}
+                      href="/blogs"
+                      className="text-gray-600 hover:text-gray-900 font-medium underline whitespace-nowrap"
+                    >
+                      {dropdownContent.exploreLink}
+                    </Link>
                   </div>
+                  <hr className="border-t border-gray-200 my-2" />
 
                   {/* Features + What's New */}
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-                    <div>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-8">
-                        Features
-                      </h2>
-                      <div className="space-y-6">
-                        {dropdownContent.features.left.map((feature, index) => (
-                          <div
-                            key={index}
-                            className="text-gray-700 font-medium hover:text-gray-900 cursor-pointer"
-                          >
-                            {feature}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="lg:pt-16">
-                      <div className="space-y-6">
-                        {dropdownContent.features.right.map(
-                          (feature, index) => (
+                  <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.5rem_1fr]  mt-8 items-stretch h-full">
+                    {/* Features columns */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
+                      <div className="flex flex-col h-full">
+                        <h2 className="text-2xl font-bold text-gray-900 mb-8">Features</h2>
+                        <div className="space-y-6 flex-1">
+                          {dropdownContent.features.left.map((feature, index) => (
                             <div
                               key={index}
                               className="text-gray-700 font-medium hover:text-gray-900 cursor-pointer"
                             >
                               {feature}
                             </div>
-                          )
-                        )}
+                          ))}
+                        </div>
+                      </div>
+                      <div className="flex flex-col h-full lg:pt-16">
+                        <div className="space-y-6 flex-1">
+                          {dropdownContent.features.right.map((feature, index) => (
+                            <div
+                              key={index}
+                              className="text-gray-700 font-medium hover:text-gray-900 cursor-pointer"
+                            >
+                              {feature}
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
-
-                    <div>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-8">
-                        What's New
-                      </h2>
-                      <div className="space-y-8">
+                    {/* Vertical Divider */}
+                    <div className="hidden lg:block border-l border-gray-200 h-full mx-auto" />
+                    <div className="block lg:hidden border-t border-gray-200 w-full my-8" />
+                    {/* What's New */}
+                    <div className="lg:pl-12 flex flex-col h-full">
+                      <h2 className="text-2xl font-bold text-gray-900 mb-8">What's New</h2>
+                      <div className="space-y-8 flex-1 flex flex-col justify-between">
                         {dropdownContent.whatsNew.map((item, index) => (
                           <div
                             key={index}
-                            className="bg-gray-900 text-white rounded-lg overflow-hidden"
+                            className="flex bg-[#192040] rounded-2xl overflow-hidden pr-4 h-full"
+                            style={{ minHeight: 200 }}
                           >
-                            <div className="relative h-32">
-                              <img
-                                src={item.image}
-                                alt={item.title}
-                                className="w-full h-full object-cover opacity-30"
-                              />
-                            </div>
-                            <div className="p-6">
-                              <h3 className="font-semibold mb-4 text-white leading-tight">
+                            <div className="flex-1 flex flex-col justify-center p-8">
+                              <div className="text-white text-100 font-normal mb-4 leading-snug">
                                 {item.title}
-                              </h3>
+                              </div>
                               <Link
                                 href={item.link}
-                                className="text-white underline hover:no-underline font-medium"
+                                className="text-white underline text-lg font-medium"
                               >
                                 Read More
                               </Link>
+                            </div>
+                            <div className="w-2/5 min-w-[200px] flex items-center">
+                              <img
+                                src={item.image}
+                                alt={item.title}
+                                className="object-cover w-full h-full rounded-r-2xl"
+                                style={{ maxHeight: 180 }}
+                              />
                             </div>
                           </div>
                         ))}
@@ -300,63 +243,106 @@ export function Header() {
             );
           })()}
 
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
-              {/* Mobile Header with Close and Language */}
-              <div className="flex items-center justify-between py-4 border-b">
-                <div className="flex items-center space-x-4">
-                  <button className="flex items-center text-sm font-medium text-gray-600">
-                    EN
-                    <ChevronDown className="ml-1 h-4 w-4" />
-                  </button>
-                </div>
-                <Button
-                  asChild
-                  className="bg-gray-900 hover:bg-gray-800 text-white rounded-full px-6 py-2"
-                >
-                  <Link href="/blogs">Blogs →</Link>
-                </Button>
-              </div>
+      </header>
 
-              {/* Mobile Navigation Items */}
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/40 lg:hidden"
+          onClick={() => {
+            setMobileMenuOpen(false);
+            setActiveDropdown(null);
+          }}
+        >
+          <div
+            className="absolute top-0 left-0 w-full bg-[#F7F6F8] border-b border-[#23263A] shadow-md animate-slide-down"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-6 h-16 border-b border-[#23263A]">
+              <Link
+                href="/"
+                className="flex items-center space-x-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="text-2xl font-bold text-[#1A1C2B]">ETP</span>
+                <div className="ml-1 w-0 h-0 border-l-[12px] border-l-orange-400 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent"></div>
+              </Link>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setActiveDropdown(null);
+                }}
+                className="text-[#23263A] text-2xl"
+              >
+                <X className="h-7 w-7" />
+              </button>
+            </div>
+
+            <nav className="flex flex-col px-6 py-4 space-y-2">
               {navigation.map((item) => (
-                <div
-                  key={item.name}
-                  className="border-b border-gray-100 last:border-b-0"
-                >
-                  <Link
-                    href={item.href}
+                <div key={item.name} className="border-b border-gray-100 last:border-b-0">
+                  <button
+                    onClick={() =>
+                      item.hasDropdown
+                        ? handleDropdownToggle(item.name)
+                        : setMobileMenuOpen(false)
+                    }
                     className={cn(
-                      "flex items-center justify-between px-3 py-4 text-base font-medium transition-colors",
+                      "w-full flex items-center justify-between px-3 py-4 text-base font-medium transition-colors",
                       pathname === item.href
                         ? "text-gray-900"
                         : "text-gray-600 hover:text-gray-900"
                     )}
-                    onClick={() => setMobileMenuOpen(false)}
                   >
                     <span>{item.name}</span>
                     {item.hasDropdown && (
-                      <ChevronDown className="h-5 w-5 rotate-90" />
+                      <ChevronDown
+                        className={cn(
+                          "h-5 w-5 transition-transform",
+                          activeDropdown === item.name && "rotate-180"
+                        )}
+                      />
                     )}
-                  </Link>
+                  </button>
+
+                  {/* Mobile Dropdown Content */}
+                  {item.hasDropdown && activeDropdown === item.name && item.dropdownContent && (
+                    <div className="bg-white px-4 pb-4 text-sm text-gray-700 space-y-2">
+                      <p className="font-semibold">{item.dropdownContent.title}</p>
+                      <p className="text-gray-500 text-sm">
+                        {item.dropdownContent.description}
+                      </p>
+                      <div className="grid grid-cols-1 gap-2 pt-2">
+                        {item.dropdownContent.features.left.map((feature, index) => (
+                          <div key={index} className="text-gray-700">{feature}</div>
+                        ))}
+                        {item.dropdownContent.features.right.map((feature, index) => (
+                          <div key={index} className="text-gray-700">{feature}</div>
+                        ))}
+                      </div>
+                      <Link
+                        href="/blogs"
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          setActiveDropdown(null);
+                        }}
+                        className="text-blue-600 underline font-medium"
+                      >
+                        {item.dropdownContent.exploreLink}
+                      </Link>
+                    </div>
+                  )}
                 </div>
               ))}
-
-              {/* Mobile CTA Button at Bottom */}
-              <div className="pt-6 pb-4">
-                <Button
-                  asChild
-                  className="w-full bg-gray-900 hover:bg-gray-800 text-white rounded-full py-3"
-                >
-                  <Link href="/blogs">Let's Talk →</Link>
-                </Button>
-              </div>
-            </div>
+            </nav>
           </div>
-        )}
-      </div>
-    </header>
+        </div>
+      )}
+
+      {/* Modal Contact Form */}
+      {showModal && (
+        <ModalConact setShowModal={setShowModal} handleSubmit={handleSubmit} />
+      )}
+    </>
   );
 }

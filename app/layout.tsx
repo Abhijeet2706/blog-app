@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { Footer } from "@/components/footer";
-import { Header } from "@/components/header";
+import Header from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: "BlogApp - Modern Blog Platform",
   description:
     "Discover amazing stories, insights, and ideas from our community of writers.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
