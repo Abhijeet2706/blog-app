@@ -3,6 +3,7 @@
 ## Overview
 
 This project is a modern, responsive frontend application built using React.js, Next.js, and Tailwind CSS. It demonstrates a strong understanding of component-based architecture, responsive design, and clean project structure. The application features a dynamic header with dropdown menus, a responsive mobile menu, a feature-rich footer, and an optional Blogs section with full CRUD functionality and an enhanced UI/UX.
+##
 🧠 Additionally, virtual scrolling has been implemented in the blog listing to efficiently render large datasets and enhance performance.
 
 
